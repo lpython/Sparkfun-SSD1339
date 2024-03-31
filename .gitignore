@@ -1,0 +1,9 @@
+*.pyc
+*.bin
+*.map
+*.elf
+*.uf2
+*.pem
+*.o
+
+.sconsign.dblite
