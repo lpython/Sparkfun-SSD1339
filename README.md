@@ -2,15 +2,39 @@
 
 This project might be useful for one looking to use start a project with FreeRTOS and LibopenCM3, but without make or vender IDE.
 
+### Building 
 
-Might require adapting SConstruct with the right flags. For example, changing 
-   ` "-mfloat-abi=hard" `
-if you switch to stm32f1, which does not have hardware floating point.
+#### Build libopencm3
+```bash
+cd libopencm3
+make
+```
+
+#### Build app with rtos source
+
+ - Scons
+    ```console
+    scons
+    scons: Reading SConscript files ...
+    scons: done reading SConscript files.
+    scons: Building targets ...
+    arm-none-eabi-gcc -o system.o -c -I./rtos -I. -Os -std=c99 -ggdb3 -mcpu=cortex-m4 -mthumb -mfloat-abi=hard  . . .   system.c
+    
+    arm-none-eabi-objcopy -O binary main.elf main.bin
+    scons: done building targets.
+    ```
+
+  - Meson
+    ```bash
+    mkdir build
+    meson setup build
+    cd build && ninja
+    ```
 
 Make is still used to have libopenCM3 generate the appropriate linker script (generated.stm32f401re.ld), which only needs to be done once.
 
 
-## Sparkfun OLED SSD1339 Driver 
+### Sparkfun OLED SSD1339 Driver 
 
 
 ![](./example.gif)
